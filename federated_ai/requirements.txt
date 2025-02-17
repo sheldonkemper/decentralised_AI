@@ -1,0 +1,8 @@
+torch
+torchvision
+numpy
+syft
+cryptography
+requests
+web3
+hagrid
