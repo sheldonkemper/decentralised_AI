@@ -26,7 +26,7 @@ class FLClient(fl.client.NumPyClient):
         self.train_data = datasets.MNIST(".", train=True, download=True, transform=transform)
         self.train_loader = torch.utils.data.DataLoader(self.train_data, batch_size=32, shuffle=True)
 
-    # Accepts an optional config parameter
+    # Modified to accept an optional config parameter
     def get_parameters(self, config=None):
         return [p.detach().numpy() for p in self.model.parameters()]
 
@@ -63,6 +63,4 @@ class FLClient(fl.client.NumPyClient):
 
 if __name__ == "__main__":
     print("Starting Federated AI Client...")
-    client = FLClient()
-    # Use the new start_client API with .to_client() conversion
-    fl.client.start_client(server_address="127.0.0.1:8080", client=client.to_client())
+    fl.client.start_numpy_client(server_address="127.0.0.1:8080", client=FLClient())
